@@ -1,9 +1,11 @@
 #include "main.h"
 #include <string.h>
 
+
 /**
  * _strcat - concatenate two strings
- *
+ * @dest: parameter
+ *@src: parameter
  * Return: char *
  */
 
