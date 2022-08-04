@@ -1,88 +1,100 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "variadic_functions.h"
 
 /**
- * print_all - prints anything
- * @format: list of types of args
- *
- * Return: void
- */
+* character - pc
+* @lst: arg
+* Return: ntg
+*/
+
+void character(va_list lst)
+{
+	printf("%c", va_arg(lst, int));
+}
+/**
+* integer - pi
+* @lst: arg
+* Return: ntg
+*/
+
+void integer(va_list lst)
+{
+	printf("%d", va_arg(lst, int));
+}
+
+/**
+* floater - pf
+* @lst: arg
+* Return: ntg
+*/
+
+void floater(va_list lst)
+{
+	printf("%f", va_arg(lst, double));
+}
+/**
+* str - ps
+* @lst: arg
+* Return: ntg
+*/
+
+void str(va_list lst)
+{
+	char *aux = va_arg(lst, char *);
+
+	if (aux != NULL)
+	{
+		printf("%s", aux);
+		return;
+	}
+	printf("(nil)");
+}
+
+/**
+* print_all - prints anything.
+* @format:lst of types of arguments passed to the function
+* Return: ntg
+*/
 
 void print_all(const char * const format, ...)
 {
-	opt_t print[] = {
-		{'c', print_char},
-		{'i', print_int},
-		{'f', print_float},
-		{'s', print_string},
-		{'\0', NULL}
+	int i, j, k;
+	va_list lst;
+
+	var_t var[] = {
+		{"c", character},
+		{"i", integer},
+		{"f", floater},
+		{"s", str},
+		{NULL, NULL}
 	};
 
-	va_list params;
-	int i, j;
-	char *sep = "";
-
-	va_start(params, format);
+	va_start(lst, format);
 	i = 0;
-	while (format[i])
+	k = 0;
+	while (format != NULL && format[i])
 	{
 		j = 0;
-		while (print[j].opt)
+		while (j < 4)
 		{
-			if (print[j].opt == format[i])
+			if (format[i] == var[j].tp[0])
 			{
-				printf("%s", sep);
-				print[j].meth(params);
-				sep = ", ";
+				switch (k)
+				{
+				case 0:
+					break;
+				default:
+					printf(", ");
+				}
+				var[j].f(lst);
+				k++;
+				break;
 			}
 			j++;
 		}
 		i++;
 	}
-
-	va_end(params);
 	printf("\n");
-}
-
-/**
- * print_char - prints char
- * @params: params
- */
-void print_char(va_list params)
-{
-	printf("%c", va_arg(params, int));
-}
-
-/**
- * print_int - prints int
- * @params: params
- */
-void print_int(va_list params)
-{
-	printf("%d", va_arg(params, int));
-}
-
-/**
- * print_float - prints float
- * @params: params
- */
-void print_float(va_list params)
-{
-	printf("%f", va_arg(params, double));
-}
-
-/**
- * print_string - prints string
- * @params: params
- */
-void print_string(va_list params)
-{
-	char *s;
-
-	s = va_arg(params, char *);
-	if (s != NULL)
-	{
-		printf("%s", s);
-		return;
-	}
-	printf("(nil)");
+	va_end(lst);
 }

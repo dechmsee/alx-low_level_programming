@@ -1,84 +1,28 @@
-#ifndef _VARIADIC_FUNCS_H
-#define _VARIADIC_FUNCS_H
-
+#ifndef VARIADIC_FUNCTIONS_H
+#define VARIADIC_FUNCTIONS_H
 #define NIL "(nil)"
-
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-
-/**
- * sum_them_all - sum all params
- * @n: num of params
- *
- * Return: sum
- */
-
+#include <stdarg.h>
 int sum_them_all(const unsigned int n, ...);
-
-/**
- * print_numbers - print numbers
- * @separator: separator
- * @n: num of params
- *
- * Return: void
- */
-
 void print_numbers(const char *separator, const unsigned int n, ...);
-
-/**
- * print_strings - print strings
- * @separator: separator
- * @n: num of params
- *
- * Return: void
- */
-
 void print_strings(const char *separator, const unsigned int n, ...);
-/**
- * struct opt - struct
- * @opt: selection
- * @meth: function
- */
-typedef struct opt
-{
-	char opt;
-	void (*meth)(va_list);
-} opt_t;
-
-/**
- * print_all - prints anything
- * @format: list of types of args
- *
- * Return: void
- */
-
 void print_all(const char * const format, ...);
-
+int _putchar (char c);
 /**
- * print_char - prints char
- * @params: params
- */
-void print_char(va_list params);
+* struct vars - character and function
+* @tp: char
+* @f: function
+*
+* Description: match the char with the function
+*/
 
-/**
- * print_int - prints int
- * @params: params
- */
-void print_int(va_list params);
-
-/**
- * print_float - prints float
- * @params: params
- */
-void print_float(va_list params);
-
-/**
- * print_string - prints string
- * @params: params
- */
-void print_string(va_list params);
-
-
+typedef struct vars
+{
+	char *tp;
+	void (*f)();
+} var_t;
+void character(va_list lst);
+void integer(va_list lst);
+void floater(va_list lst);
+void str(va_list lst);
 #endif
