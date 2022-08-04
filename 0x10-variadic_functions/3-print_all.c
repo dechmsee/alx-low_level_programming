@@ -17,11 +17,11 @@ void print_all(const char * const format, ...)
 		{'\0', NULL}
 	};
 
-	va_list ap;
+	va_list params;
 	int i, j;
 	char *sep = "";
 
-	va_start(ap, format);
+	va_start(params, format);
 	i = 0;
 	while (format[i])
 	{
@@ -31,7 +31,7 @@ void print_all(const char * const format, ...)
 			if (print[j].opt == format[i])
 			{
 				printf("%s", sep);
-				print[j].meth(ap);
+				print[j].meth(params);
 				sep = ", ";
 			}
 			j++;
@@ -39,47 +39,45 @@ void print_all(const char * const format, ...)
 		i++;
 	}
 
-	va_end(ap);
+	va_end(params);
 	printf("\n");
 }
 
 /**
  * print_char - prints char
- * @ap: params
+ * @params: params
  */
-void print_char(va_list ap)
+void print_char(va_list params)
 {
-	printf("%c", va_arg(ap, int));
+	printf("%c", va_arg(params, int));
 }
 
 /**
  * print_int - prints int
- * @ap: params
+ * @params: params
  */
-void print_int(va_list ap)
+void print_int(va_list params)
 {
-	printf("%d", va_arg(ap, int));
+	printf("%d", va_arg(params, int));
 }
 
 /**
  * print_float - prints float
- * @ap: params
+ * @params: params
  */
-void print_float(va_list ap)
+void print_float(va_list params)
 {
-	printf("%f", va_arg(ap, double));
+	printf("%f", va_arg(params, double));
 }
 
 /**
  * print_string - prints string
- * @ap: params
+ * @params: params
  */
-void print_string(va_list ap)
+void print_string(va_list params)
 {
 	char *s;
 
-	s = va_arg(ap, char *);
-	if (s != NULL)
-	printf("%s", s);
-	return;
+	s = va_arg(params, char *);
+	printf("%s", s ? s : NIL);
 }
