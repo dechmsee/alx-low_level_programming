@@ -79,5 +79,10 @@ void print_string(va_list params)
 	char *s;
 
 	s = va_arg(params, char *);
-	printf("%s", s ? s : NIL);
+	if (s != NULL)
+	{
+		printf("%s", s);
+		return;
+	}
+	printf("(nil)");
 }
