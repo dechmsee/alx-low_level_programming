@@ -11,7 +11,7 @@ void free_listint(listint_t *head)
 {
 	listint_t *mem_loc;
 
-	if (head != NULL)
+	if (!head)
 		return;
 
 	for (; head;)
