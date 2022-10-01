@@ -1,2 +1,2 @@
-What is a doubly linked list
+What is a doubly linked list?
 How to use doubly linked lists
