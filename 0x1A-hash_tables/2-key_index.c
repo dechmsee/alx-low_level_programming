@@ -2,9 +2,9 @@
 
 /**
 * key_index - Get index at which a key should
-* 		be stored in an array of a hash table.
+*		be stored in an array of a hash table.
 * @key: The key to get the index.
-* @size: Size  of the hash table array.
+* @size: Size	of the hash table array.
 *
 * Return: Index of the key.
 * Description: Uses the djb2 algorithm.
